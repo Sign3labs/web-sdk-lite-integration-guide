@@ -12,7 +12,7 @@ The Sign3 WEB SDK is a JavaScript-based fraud prevention toolkit designed to ass
 4. After initializing, you can get browser intelligence upon specific actions (e.g., clicking on Login, Payment, and Registration buttons before calling the API).
 5. Call `result.get().then(response)`, which returns a promise resolving to a response object containing browser information or rejecting with an error if something went wrong.
 6. The response object contains fields like fingerprint, request ID, browser intelligence data, or IP intelligence data.
-
+7. Get in touch with the sign3 team to download the [latest version](https://github.com/Sign3labs/web-sdk-lite-integration-guide/tree/main?tab=readme-ov-file#change-log) to integrate
 ---
 
 ## Bundling Into Your Code
@@ -27,7 +27,7 @@ To use the SDK, initialize it with the required parameters.
 import sdk from './sign3-web-sdk.js';
 
 sdk.initialize({
-  env: 'PROD', // required: The environment ('PROD', 'DEV', 'STAGE').
+  env: 'PROD', // required: The environment ('PROD', 'STAGE').
   sessionId: 'your-unique-session-id', // required: A unique session identifier to track the user session.
   apiKey: 'your-api-key', // required: API key used for authentication (shared separately by Sign3).
   apiSecret: 'your-api-secret', // required: Secret key used for authentication (shared separately by Sign3).
@@ -42,7 +42,7 @@ sdk.initialize({
 
 | Parameter   | Type     | Required | Description                                             |
 | ----------- | -------- | -------- | ------------------------------------------------------- |
-| `env`       | `string` | Yes      | Specifies the environment ('PROD', 'DEV', 'STAGE').     |
+| `env`       | `string` | Yes      | Specifies the environment ('PROD', 'STAGE').     |
 | `sessionId` | `string` | Yes      | A unique session identifier to track the user session.  |
 | `apiKey`    | `string` | Yes      | API key used for authentication (shared separately).    |
 | `apiSecret` | `string` | Yes      | Secret key used for authentication (shared separately). |
