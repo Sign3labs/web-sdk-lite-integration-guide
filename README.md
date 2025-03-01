@@ -1,18 +1,22 @@
 # Sign3 Web SDK Integration Guide
 
-The Sign3 WEB SDK is a JavaScript-based fraud prevention toolkit designed to assess browser security, detecting potential risks such as Proxy, VPN connections, USER AGENT spoofing, TOR connections, and more. Providing insights into the browser's safety, it enhances security measures against fraudulent activities and ensures robust protection.
+The Sign3 Web SDK is a JavaScript-based fraud prevention toolkit designed to assess browser security, detecting potential risks such as proxy usage, VPN connections, user agent spoofing, TOR connections, and more. By providing insights into the browser's security, it enhances protection against fraudulent activities and ensures robust security measures.
+
+**Note:** The SDK only collects signals from the browser environment. It does not store or process them internally. The integrating party is responsible for encrypting and sending the collected signals to the backend for risk analysis.
 
 ---
 
-## Adding Sign3 WEB SDK to Your Project
+## Adding Sign3 Web SDK to Your Project
 
-1. Download the JavaScript Agent from the CDN link and include it in your codebase with file name `sign3-web-sdk.js` (provided seperately).
+1. Download the JavaScript agent from the CDN link and include it in your codebase as `sign3-web-sdk.js` (provided separately).
 2. Call `sign3.initialize(config)` to initialize the JavaScript client for signal collection.
-3. `sign3.initialize(config)` returns a promise that resolves to an object containing the `get` method.
-4. After initializing, you can get browser intelligence upon specific actions (e.g., clicking on Login, Payment, and Registration buttons before calling the API).
-5. Call `result.get().then(response)`, which returns a promise resolving to a response object containing browser information or rejecting with an error if something went wrong.
-6. The response object contains fields like fingerprint, request ID, browser intelligence data, or IP intelligence data.
-7. Get in touch with the sign3 team to download the [latest version](https://github.com/Sign3labs/web-sdk-lite-integration-guide/tree/main?tab=readme-ov-file#change-log) to integrate
+3. `sign3.initialize(config)` returns an object that includes the `get` method.
+4. Wrap initialization in a try-catch block to handle errors in case of an invalid configuration.
+5. After initialization, retrieve browser fingerprinting signals before triggering specific actions (e.g., Login, Payment, or Registration) using the `get` method.
+6. Call `result.get(successCallback, errorCallback)`, passing two callbacks: one for success and one for error handling.
+7. On success, the callback receives an object containing security signals that must be sent to the backend in encrypted form. Encryption must be implemented by the integrating party—an example is provided later in the document.
+8. Contact the Sign3 team to download the [latest version](https://github.com/Sign3labs/web-sdk-lite-integration-guide/tree/main?tab=readme-ov-file#change-log) for integration.
+
 ---
 
 ## Bundling Into Your Code
@@ -25,24 +29,28 @@ To use the SDK, initialize it with the required parameters.
 
 ```javascript
 import sdk from './sign3-web-sdk.js';
-
-sdk.initialize({
-  env: 'PROD', // required: The environment ('PROD', 'STAGE').
-  sessionId: 'your-unique-session-id', // required: A unique session identifier to track the user session.
-  apiKey: 'your-api-key', // required: API key used for authentication (shared separately by Sign3).
-  apiSecret: 'your-api-secret', // required: Secret key used for authentication (shared separately by Sign3).
-}).then((result) => {
-  console.log('Initialization successful');
-}, (error) => {
-  console.log('Initialization error:', error.message);
-});
+try {
+  sdk.initialize({
+    sessionId: 'your-unique-session-id', // Required: A unique identifier to track the user session.
+    apiKey: 'your-api-key', // Required: API key for authentication (shared separately by Sign3).
+    apiSecret: 'your-api-secret', // Required: Secret key for authentication (shared separately by Sign3).
+  }).get(
+  function(result) {
+    console.log(result);
+  },
+  function(error) {
+    console.error("Error:", error.message); // Example: "Something missing from required fields"
+  }
+);
+} catch (error) {
+  console.log("Initialization failed: ", error);
+}
 ```
 
 ### Parameters
 
 | Parameter   | Type     | Required | Description                                             |
-| ----------- | -------- | -------- | ------------------------------------------------------- |
-| `env`       | `string` | Yes      | Specifies the environment ('PROD', 'STAGE').     |
+|------------|----------|----------|---------------------------------------------------------|
 | `sessionId` | `string` | Yes      | A unique session identifier to track the user session.  |
 | `apiKey`    | `string` | Yes      | API key used for authentication (shared separately).    |
 | `apiSecret` | `string` | Yes      | Secret key used for authentication (shared separately). |
@@ -54,30 +62,124 @@ sdk.initialize({
 Once initialized successfully, use the `get` method to retrieve browser information.
 
 ```javascript
-result.get().then((response) => {
+result.get(function(response) {
   console.log(response);
-}, (error) => {
+}, function(error) {
   console.log('Get error:', error.message);
 });
 ```
 
 ---
 
+## `get` Method Response Structure
+
+The `get` method returns an object containing various security signals that must be sent to the backend in an encrypted format. Below is an example response structure:
+
+```json
+{
+  "f": "refscfgg453ccx",
+  "a": {"a": "", "b": "", "c": ""},
+  "c": {"a": "cdddd-vddss", "b": null, "c": null, ...},
+  "ze": {},
+  "v": "lite",
+  "p": null || "wdfddsx",
+  "additionalParams": null
+}
+```
+
+---
+
 ## Error Handling
 
-If there is any error during initialization or a `get` call, it is handled using `.then()` and `.catch()` blocks.
+Any error during a `get` call is handled using the `errorCallback` parameter in the `get` method.
 
 ### Example Error Handling
 
 ```javascript
-sdk.initialize({ ... }).then((result) => {
-  result.get()
-    .then((response) => console.log(response))
-    .catch((error) => console.log('Get error:', error.message));
-}).catch((error) => {
-  console.log('Initialization error:', error.message);
+result.get(function(response) {}, function(error) {
+  console.log('Get error:', error.message);
 });
 ```
+
+---
+
+## Encryption Example
+
+The integrating party must encrypt the data returned by the `get` method before sending it to the backend. Below is an example of how encryption can be implemented using AES-CBC:
+
+```javascript
+const crypLib = window.crypto;
+const { subtle: sbtl } = crypLib || {};
+
+const keySize = 128; // In bits
+const iterationCount = 1000;
+
+const generateKey = async (salt, passPhrase) => {
+  const encoder = new TextEncoder();
+  const keyMaterial = await sbtl.importKey(
+    'raw',
+    encoder.encode(passPhrase),
+    { name: 'PBKDF2' },
+    false,
+    ['deriveKey']
+  );
+  return await sbtl.deriveKey(
+    {
+      name: 'PBKDF2',
+      salt: encoder.encode(salt),
+      iterations: iterationCount,
+      hash: 'SHA-256',
+    },
+    keyMaterial,
+    { name: 'AES-CBC', length: keySize },
+    false,
+    ['encrypt', 'decrypt']
+  );
+};
+
+export const encrypt = async (salt, passPhrase, data) => {
+  const key = await generateKey(salt, passPhrase);
+  const iv = crypLib.getRandomValues(new Uint8Array(16)); // 128-bit IV
+  const encoder = new TextEncoder();
+  const encrypted = await sbtl.encrypt(
+    {
+      name: 'AES-CBC',
+      iv: iv,
+    },
+    key,
+    encoder.encode(data)
+  );
+  const encData = btoa(String.fromCharCode(...new Uint8Array(encrypted)));
+  const backendIv = Array.from(iv).map((b) => b.toString(16).padStart(2, '0')).join('');
+  return {
+    encodedData: encData,
+    iv: backendIv,
+  };
+};
+```
+
+## Sending Data to Backend
+
+```javascript
+const authHeader = `${apiKey}:${apiSecret}`;
+const headers = {
+  Authorization: `Basic ${window.btoa(authHeader)}`,
+  'TENANT-ID': iv,
+  'Content-Type': 'text/plain',
+  'client-ip-forwarded': "3.25.124.56",
+  'client-ts-millis': Date.now(),
+};
+
+fetch('https://intelligence-b.sign3.in/v1/userInsights/web?cstate=true', {
+    method: "POST",
+    headers: headers,
+    body: encodedData
+}).then((response) => {
+    console.log(response);
+}).catch((err) => {});
+```
+
+**Note:** The `client-ip-forwarded` header is used to pass the client IP address received at the integrating party's backend to the Sign3 backend to retrieve IP intelligence from Sign3.
 
 ---
 
