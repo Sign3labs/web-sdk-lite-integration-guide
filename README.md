@@ -115,7 +115,7 @@ The integrating party must encrypt the data returned by the `get` method before 
 - The IV is converted into a **hexadecimal string** before being sent.
 - The encryption process ensures **data confidentiality and security** before it is sent to the backend.
 
-## Encryption Example
+## Encryption Examples
 
 ```javascript
 const crypLib = window.crypto;
@@ -166,6 +166,79 @@ export const encrypt = async (salt, passPhrase, data) => {
     iv: backendIv,
   };
 };
+
+// example usages
+const {encodedData, iv} = await encrypt(apiKey, apiSecret, response)
+```
+
+```python
+import base64
+import os
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+import json
+
+# Constants
+KEY_SIZE = 128  # In bits
+ITERATION_COUNT = 1000
+
+def generate_key(salt: str, passphrase: str) -> bytes:
+    """Generate an AES key from a passphrase and salt using PBKDF2."""
+    kdf = PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=KEY_SIZE // 8,  # Convert bits to bytes
+        salt=salt.encode('utf-8'),
+        iterations=ITERATION_COUNT,
+        backend=default_backend()
+    )
+    key = kdf.derive(passphrase.encode('utf-8'))
+    return key
+
+
+def encrypt(salt: str, passphrase: str, data: str) -> dict:
+    """Encrypt data using AES-CBC with a key derived from passphrase and salt."""
+    # Generate random 128-bit IV (16 bytes)
+    iv = os.urandom(16)
+
+    # Generate key
+    key = generate_key(salt, passphrase)
+
+    # Create cipher
+    cipher = Cipher(
+        algorithms.AES(key),
+        modes.CBC(iv),
+        backend=default_backend()
+    )
+    encryptor = cipher.encryptor()
+
+    # Pad data to be multiple of block size (16 bytes for AES)
+    padding_length = 16 - (len(data) % 16)
+    padded_data = data + (chr(padding_length) * padding_length)
+
+    # Encrypt
+    encrypted = encryptor.update(padded_data.encode('utf-8')) + encryptor.finalize()
+
+    # Convert to base64 for encoded data
+    encoded_data = base64.b64encode(encrypted).decode('utf-8')
+    
+    # Convert IV to hex string (similar to JS output)
+    backend_iv = iv.hex()
+
+    return {
+        'encodedData': encoded_data,
+        'iv': backend_iv
+    }
+
+
+if __name__ == "__main__":
+    apikey = "apiKey"
+    apiSecret = "apiSecret"
+    data = json.dumps(resp)
+    result = encrypt(apikey, apiSecret, response)
+    print("Encoded Data:", result['encodedData'])
+    print("IV:", result['iv'])
 ```
 
 ## Sending Data to Backend
