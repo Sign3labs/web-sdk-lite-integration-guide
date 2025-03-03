@@ -74,7 +74,6 @@ result.get(function(response) {
 ## `get` Method Response Structure
 
 The `get` method returns an object containing various security signals that must be sent to the backend in an encrypted format. Below is an example response structure:
-
 ```json
 {
   "f": "refscfgg453ccx",
@@ -82,11 +81,10 @@ The `get` method returns an object containing various security signals that must
   "c": {"a": "cdddd-vddss", "b": null, "c": null, ...},
   "ze": {},
   "v": "lite",
-  "p": null || "wdfddsx",
+  "p": "wdfddsx",
   "additionalParams": null
 }
 ```
-
 ---
 
 ## Error Handling
@@ -172,17 +170,6 @@ export const encrypt = async (salt, passPhrase, data) => {
 
 ## Sending Data to Backend
 
-```javascript
-const authHeader = `${apiKey}:${apiSecret}`;
-const headers = {
-  Authorization: `Basic ${window.btoa(authHeader)}`,
-  'TENANT-ID': iv,
-  'Content-Type': 'text/plain',
-  'client-ip-forwarded': "3.25.124.56",
-  'client-ts-millis': Date.now(),
-};
-```
-
 ### curl
 
 ```
@@ -201,6 +188,16 @@ curl 'https://intelligence-b.sign3.in/v1/userInsights/web?cstate=true' \
   -H 'tenant-id: 933c43f3528f5d813a8197da7ad9119e' \
   --data-raw '+HL9FSxzTYwiVa5EIYjKMYq4hOHolRXmEm40NtOsRQTDf5iENq7D+ROSWk+3w4Dy4twTw8PM+6snVfoHfEpiwb4hQgaQUBz2j9561WxVl9claxlTN87N3HBoR9KhBN0PQxAu8l/axev1jT2HwfL4cbFB7/4q9BuoSV7qWf6LQ7ODeODhV5vvLIp6+zUBiM0VIcqqlv43zM18FfUuuK91/dzpoiU8SFGgEcmaKsha7V6ID9pjFLkT7ij+zE+R+pP0BhvSc9FGuuvrHr8h5gyoXrlK4X3++oq22pMpBHZhkgnP15KcPA/DMN0maR691W6hafjrYBPOr4kekmYlNsqPMmOv1w67l/9TLdxlklKERFetd2kFE5861IqIKVIK0U9/63RNhkPkTWuEPTcXb40DUc1pU2DhbpBd7Uv01C+E3okgklKQBJnFxTLasjfuvoYyGHKX/O52GrQrsNLL016EJ99o+zPP1AVV69bn6uztrGlQsL7rN0Qij+Z/nnLf/WsFbZUno24Qy2lNaP7WirdCgyUGWXitRNg78/ApQe/JF6yDYQ71+mgZ/JHVcKARNpK3cp/iqwZ3kGs4a6HmRc9GGtzjjdWZEYtA7aU87HS+5O7Pp3aEpBAuDZTPxXarbV+5AiFI68ERCjuWJktmpkA5EMcgaDDHVKHRv4Ged9QubOjD0+nPLIOa/lku+btAwipcw26xQRjEo/EAIjQsMDXIzqt11FU86P48/ReNnUVN+7leVALeMkyvDR9iK2DyAdNy5QM9J/PnJ6IA8qJkgZ9JTgCaqX44b5GlcdousV45yJyg5Dltib1Ib+RSGnb67DLrR8CdJFpkjqrRvnZk2fpzlYVBo0try56uFtvOxR2Z89woAfFO9PO7zPVFAHoxqbxEUfqgJAxgu5zWAXugXgKiAxYtfPoV44TSAQLHZaWTxTx7BzCL9eSDP7hg3t8bGRocRNHk4TL4O4sTrH97cXUgQXkBaJrtugCMwyHMQaOh8cLD1e/y6wf7AB6qUokdcUQcVsnCSi1m0jVZ7O4g97Qb5iJ601vKZtxhvukr8P42sgnHXLk+vqr1ikpSZiQvS9Xb+5EZKdQ9HHVEaqIUBNNhX9hNLGMhT+xUNstjyYwkdXgw6ZQNdzlQ+7RvBHgWAifIC++pLXtrCWJWC3ql/gXivPH/e7cVrtl4WBZrJfloly7/zIvalmT8XL6kYxYRZSJ0MkK1WVFhrXK/usehMMWGSwpUx6UYxUqcXkVfObMw5CH4btoS0kOEjnKqYx95dx6Zb3XKHTqAXh27UjQ6bT4DtDS3W8f/BQc0ZrKVaMDXKbnWtadkTaJy41mDOiX329oa23G6Gdyb7UWN7MbpivFMgiEvXHwA38nXmWGJicDgUwSte1qzxZ0YI8u3X/dFgn7xM+0rgZI5/AcMoL+ZTSkmXmrlZA+sYy8GVc1vjDW0ROAE7BzgXW7gEPe3DoBPTx1u5qpShdM8nkzqCxYN/sdw2ARTTG4BmdLkvJbFMDQerpo1B0oBthqc56X2PVYax577G5vwnQIU8Re9MXRpefA7ImeIKmCTDv5tve7I5sPtiTQzQ4i7bLoZ6StQbZqWNo1gFfICDAgz4Jq03JN+EBSbB5C7sNOs6jJd4YLWn1rljkA4fLFDD2XwXuUpH/zpw/wi7YzQNgj9si6VU8YT1FQLtJvQOyqoKWrNPFocpznQP4MGTv/KktPzMWo4FcR974uM'
 ```
+
+### Headers
+| Header                   | Required | Description                                             |
+|--------------------------|----------|---------------------------------------------------------|
+| `authorization`          | Yes      | Basis auth header in format `Basic Base64(${apiKey}:${apiSecret})`  |
+| `client-ip-forwarded`    | Yes      | Ip address of user browser to retrieve IP intelligence from Sign3 (if not provided no IP intelligence will be provided in response).  |
+| `client-ts-millis`       | Yes      | Request timestamp in milliseconds |
+| `sdk-version-code`       | Yes      | Value `1` as provided in above curl |
+| `sdk-version-name`       | Yes      | Value `1.0.0` as provided in above curl |
+| `tenant-id`              | Yes      | iv returned from encrypt method (as provided in example) |
 
 **Note:** The `client-ip-forwarded` header is used to pass the client IP address received at the integrating party's backend to the Sign3 backend to retrieve IP intelligence from Sign3.
 
