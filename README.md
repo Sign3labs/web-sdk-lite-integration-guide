@@ -181,19 +181,12 @@ curl 'https://intelligence-b.sign3.in/v1/userInsights/web?cstate=true' \
   -H 'client-ip-forwarded: 182.74.33.58' \
   -H 'client-ts-millis: 1740991469037' \
   -H 'content-type: text/plain' \
-  -H 'origin: http://localhost:3000' \
-  -H 'priority: u=1, i' \
-  -H 'referer: http://localhost:3000/' \
   -H 'sdk-version-code: 1' \
   -H 'sdk-version-name: 1.0.0' \
-  -H 'sec-ch-ua: "Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"' \
-  -H 'sec-ch-ua-mobile: ?0' \
-  -H 'sec-ch-ua-platform: "macOS"' \
   -H 'sec-fetch-dest: empty' \
   -H 'sec-fetch-mode: cors' \
   -H 'sec-fetch-site: cross-site' \
   -H 'tenant-id: 933c43f3528f5d813a8197da7ad9119e' \
-  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' \
   --data-raw '+HL9FSxzTYwiVa5EIYjKMYq4hOHolRXmEm40NtOsRQTDf5iENq7D+ROSWk+3w4Dy4twTw8PM+6snVfoHfEpiwb4hQgaQUBz2j9561WxVl9claxlTN87N3HBoR9KhBN0PQxAu8l/axev1jT2HwfL4cbFB7/4q9BuoSV7qWf6LQ7ODeODhV5vvLIp6+zUBiM0VIcqqlv43zM18FfUuuK91/dzpoiU8SFGgEcmaKsha7V6ID9pjFLkT7ij+zE+R+pP0BhvSc9FGuuvrHr8h5gyoXrlK4X3++oq22pMpBHZhkgnP15KcPA/DMN0maR691W6hafjrYBPOr4kekmYlNsqPMmOv1w67l/9TLdxlklKERFetd2kFE5861IqIKVIK0U9/63RNhkPkTWuEPTcXb40DUc1pU2DhbpBd7Uv01C+E3okgklKQBJnFxTLasjfuvoYyGHKX/O52GrQrsNLL016EJ99o+zPP1AVV69bn6uztrGlQsL7rN0Qij+Z/nnLf/WsFbZUno24Qy2lNaP7WirdCgyUGWXitRNg78/ApQe/JF6yDYQ71+mgZ/JHVcKARNpK3cp/iqwZ3kGs4a6HmRc9GGtzjjdWZEYtA7aU87HS+5O7Pp3aEpBAuDZTPxXarbV+5AiFI68ERCjuWJktmpkA5EMcgaDDHVKHRv4Ged9QubOjD0+nPLIOa/lku+btAwipcw26xQRjEo/EAIjQsMDXIzqt11FU86P48/ReNnUVN+7leVALeMkyvDR9iK2DyAdNy5QM9J/PnJ6IA8qJkgZ9JTgCaqX44b5GlcdousV45yJyg5Dltib1Ib+RSGnb67DLrR8CdJFpkjqrRvnZk2fpzlYVBo0try56uFtvOxR2Z89woAfFO9PO7zPVFAHoxqbxEUfqgJAxgu5zWAXugXgKiAxYtfPoV44TSAQLHZaWTxTx7BzCL9eSDP7hg3t8bGRocRNHk4TL4O4sTrH97cXUgQXkBaJrtugCMwyHMQaOh8cLD1e/y6wf7AB6qUokdcUQcVsnCSi1m0jVZ7O4g97Qb5iJ601vKZtxhvukr8P42sgnHXLk+vqr1ikpSZiQvS9Xb+5EZKdQ9HHVEaqIUBNNhX9hNLGMhT+xUNstjyYwkdXgw6ZQNdzlQ+7RvBHgWAifIC++pLXtrCWJWC3ql/gXivPH/e7cVrtl4WBZrJfloly7/zIvalmT8XL6kYxYRZSJ0MkK1WVFhrXK/usehMMWGSwpUx6UYxUqcXkVfObMw5CH4btoS0kOEjnKqYx95dx6Zb3XKHTqAXh27UjQ6bT4DtDS3W8f/BQc0ZrKVaMDXKbnWtadkTaJy41mDOiX329oa23G6Gdyb7UWN7MbpivFMgiEvXHwA38nXmWGJicDgUwSte1qzxZ0YI8u3X/dFgn7xM+0rgZI5/AcMoL+ZTSkmXmrlZA+sYy8GVc1vjDW0ROAE7BzgXW7gEPe3DoBPTx1u5qpShdM8nkzqCxYN/sdw2ARTTG4BmdLkvJbFMDQerpo1B0oBthqc56X2PVYax577G5vwnQIU8Re9MXRpefA7ImeIKmCTDv5tve7I5sPtiTQzQ4i7bLoZ6StQbZqWNo1gFfICDAgz4Jq03JN+EBSbB5C7sNOs6jJd4YLWn1rljkA4fLFDD2XwXuUpH/zpw/wi7YzQNgj9si6VU8YT1FQLtJvQOyqoKWrNPFocpznQP4MGTv/KktPzMWo4FcR974uM'
 ```
 
