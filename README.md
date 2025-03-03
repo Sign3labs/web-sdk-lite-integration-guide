@@ -252,7 +252,7 @@ if __name__ == "__main__":
 curl 'https://intelligence-b.sign3.in/v1/userInsights/web?cstate=true' \
   -H 'accept: */*' \
   -H 'accept-language: en-GB,en;q=0.9' \
-  -H 'authorization: Basic U2lnbjNUZXN0QXBwOlNpZ24zbGFic0BpbnRlcm5hbA==' \
+  -H 'authorization: Basic U2lnbjNUZXN0QXBwOlNpZ24vddcdFic0BpbnRlcm5hbA==' \
   -H 'client-ip-forwarded: 182.74.33.58' \
   -H 'client-ts-millis: 1740991469037' \
   -H 'content-type: text/plain' \
