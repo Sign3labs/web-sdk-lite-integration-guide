@@ -327,22 +327,24 @@ This section provides a detailed explanation of the fields included in the brows
 - **firstSeenDays** *(integer)*: The number of days since this device was first seen.
 
 ### IP Intelligence
-- **city** *(string)*: The city where the detected IP is located.
-- **region** *(string)*: The administrative region associated with the IP.
-- **country** *(string)*: The country code (ISO 3166-1 alpha-2) where the IP originates.
-- **latitude** *(float)*: Approximate latitude coordinate of the detected IP.
-- **longitude** *(float)*: Approximate longitude coordinate of the detected IP.
-- **isVPN** *(boolean)*: Indicates whether the detected IP is associated with a VPN service.
-- **isTor** *(boolean)*: Indicates whether the detected IP is part of the Tor network.
-- **isProxy** *(boolean)*: Indicates whether the detected IP is using a proxy server.
-- **ip** *(string)*: The IP address of the detected user.
+- **ipIntelligence** *(object)*:
+  - **city** *(string)*: The city where the detected IP is located.
+  - **region** *(string)*: The administrative region associated with the IP.
+  - **country** *(string)*: The country code (ISO 3166-1 alpha-2) where the IP originates.
+  - **latitude** *(float)*: Approximate latitude coordinate of the detected IP.
+  - **longitude** *(float)*: Approximate longitude coordinate of the detected IP.
+  - **isVPN** *(boolean)*: Indicates whether the detected IP is associated with a VPN service.
+  - **isTor** *(boolean)*: Indicates whether the detected IP is part of the Tor network.
+  - **isProxy** *(boolean)*: Indicates whether the detected IP is using a proxy server.
+  - **ip** *(string)*: The IP address of the detected user.
 
 ### Browser Detections
-- **isIncognito** *(Boolean)*: Indicates whether the browser is in incognito or private browsing mode.
-- **isPrivacyFocused** *(Boolean)*: Indicates whether the browser is privacy focused. It has built-in ad blocking, fingerprinting protection, or other privacy-focused modifications.
-- **isBotDetected** *(Boolean)*: Identifies if the user is a bot or an automated script.
-- **isAdBlockerEnabled** *(Boolean)*: Determines if an ad blocker is active in the browser.
-- **isUserAgentSpoofed** *(Boolean)*: Detects if the user agent string has been modified to disguise the browser's identity.
+- **browserDetections** *(object)*:
+  - **isIncognito** *(boolean)*: Indicates whether the browser is in incognito or private browsing mode.
+  - **isPrivacyFocused** *(boolean)*: Indicates whether the browser is privacy focused. It has built-in ad blocking, fingerprinting protection, or other privacy-focused modifications.
+  - **isBotDetected** *(boolean)*: Identifies if the user is a bot or an automated script.
+  - **isAdBlockerEnabled** *(boolean)*: Determines if an ad blocker is active in the browser.
+  - **isUserAgentSpoofed** *(boolean)*: Detects if the user agent string has been modified to disguise the browser's identity.
 
 **Note:** All signals are collected in real-time when the `get` call is made.
 
