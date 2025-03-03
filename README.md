@@ -117,6 +117,8 @@ The integrating party must encrypt the data returned by the `get` method before 
 
 ## Encryption Examples
 
+### javascript
+
 ```javascript
 const crypLib = window.crypto;
 const { subtle: sbtl } = crypLib || {};
@@ -171,6 +173,7 @@ export const encrypt = async (salt, passPhrase, data) => {
 const {encodedData, iv} = await encrypt(apiKey, apiSecret, response)
 ```
 
+### python
 ```python
 import base64
 import os
