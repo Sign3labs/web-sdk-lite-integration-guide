@@ -281,7 +281,7 @@ curl 'https://intelligence-b.sign3.in/v1/userInsights/web?cstate=true' \
 
 ## Browser Fingerprint Response Structure
 
-This section provides a detailed explanation of the fields included in the browser fingerprint response JSON.
+This section provides a detailed explanation of the fields included in the browser fingerprint response JSON when the request is successful (HTTP status code 200).
 
 ### JSON Structure
 
