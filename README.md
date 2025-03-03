@@ -348,6 +348,19 @@ This section provides a detailed explanation of the fields included in the brows
 
 **Note:** All signals are collected in real-time when the `get` call is made.
 
+## Response Codes
+
+The API may return the following HTTP status codes based on the outcome of the request. Each error code is associated with a unique identifier and default message for troubleshooting purposes:
+
+| HTTP Status Code | Code   | Default Message                             | Description |
+|-----------------|--------|---------------------------------------------|-------------|
+| 200            | N/A    | N/A                                         | Request successful; response body as shown above. |
+| 429            | 42901  | Too many requests                           | Rate limit exceeded; too many requests sent. |
+| 401            | 50001  | Unauthorized Access                         | Request lacks valid authentication credentials. |
+| 404            | 50002  | User not found                              | The requested user or resource was not found. |
+| 400            | 50003  | Some of the input fields may be incorrect   | Bad request due to invalid or malformed input. |
+| 500            | 50004  | Something went wrong                        | Internal server error; unexpected failure. |
+
 ---
 
 ## Change Log
