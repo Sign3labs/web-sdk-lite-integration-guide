@@ -103,9 +103,21 @@ result.get(function(response) {}, function(error) {
 
 ---
 
-## Encryption Example
-
+## Encryption Process
 The integrating party must encrypt the data returned by the `get` method before sending it to the backend. Below is an example of how encryption can be implemented using AES-CBC:
+
+- The SDK implements **AES-CBC (Cipher Block Chaining) encryption** for securing collected signals before transmission.
+- Use **key derivation function (PBKDF2)** to generate an encryption key from passphrase (apiSecret) and salt (apiKey).
+- The encryption process includes:
+  1. **Generating a cryptographic key** using PBKDF2 with multiple iterations (**1000 iterations**) for added security.
+  2. **Using a 128-bit encryption key** for AES-CBC mode.
+  3. **Creating a random Initialization Vector (IV) of 16 bytes (128 bits)** to ensure encryption uniqueness.
+  4. **Encoding and encrypting data** using AES-CBC mode.
+  5. **Converting encrypted data to a secure format** (Base64) for transmission.
+- The IV is converted into a **hexadecimal string** before being sent.
+- The encryption process ensures **data confidentiality and security** before it is sent to the backend.
+
+## Encryption Example
 
 ```javascript
 const crypLib = window.crypto;
