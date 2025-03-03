@@ -361,6 +361,22 @@ The API may return the following HTTP status codes based on the outcome of the r
 | 400            | 50003  | Some of the input fields may be incorrect   | Bad request due to invalid or malformed input. |
 | 500            | 50004  | Something went wrong                        | Internal server error; unexpected failure. |
 
+### Error Response Structure
+
+When an error occurs, the API returns a JSON response in the following format:
+
+```json
+{
+    "errorCode": "<Code from above table>"
+}
+```
+example:
+```json
+{
+    "errorCode": "50004"
+}
+```
+
 ---
 
 ## Change Log
