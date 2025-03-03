@@ -169,14 +169,29 @@ const headers = {
   'client-ip-forwarded': "3.25.124.56",
   'client-ts-millis': Date.now(),
 };
+```
 
-fetch('https://intelligence-b.sign3.in/v1/userInsights/web?cstate=true', {
-    method: "POST",
-    headers: headers,
-    body: encodedData
-}).then((response) => {
-    console.log(response);
-}).catch((err) => {});
+### curl
+
+```
+curl 'https://intelligence-b.sign3.in/v1/userInsights/web?cstate=true' \
+  -H 'accept: */*' \
+  -H 'accept-language: en-GB,en;q=0.9' \
+  -H 'authorization: Basic U2lnbjNUZXN0QXBwOlNpZ24zbGFic0BpbnRlcm5hbA==' \
+  -H 'client-ts-millis: 1740987987999' \
+  -H 'content-type: text/plain' \
+  -H 'origin: http://localhost:3000' \
+  -H 'priority: u=1, i' \
+  -H 'referer: http://localhost:3000/' \
+  -H 'sec-ch-ua: "Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: cross-site' \
+  -H 'tenant-id: d2fe03478ecab1fa6a5f588e9a983798' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' \
+  --data-raw 'hBIeITh5cewIVn+kx68qF7h+JzgijGhEPX2jf1mR4sYSTmS5yyHOLxxTBTjoTuC6CWTscxJfRJs4aftLDsKUva2Or3JZ6YKF+twgh4FvwCyFEG7NckfIwklKtjdfBHrrhxo5YU61TweIora+/JHe/h71Fy3ixblJN/luvAI2V2u/zm25Uki3oN/GxbVf2CTLysD6i3Jkp8EU+Q//dmc6dFHMF5GhztyONVlgrd28F4mmgerePiif02YPGYwI0lKh9dq/gzPdx+6laLeTgt+cCJfXtMfsQypuVPufWBQtircteVuvES8JFX0ID+8EoNOqxXZcScctTYo7hmXe1X9E4TeFPusoutm+zwY2Zl2NaObCnRsDjGxH5UQpT1fibr3mTD5UlPbbOSSsJycFukfMwumJqE4Tq5N1LGbchTi4DB3C0ZHxjv4gU5ps0m2OhewrsOAtvSPhiqUhFpTr0FAtLKtHkB/264NqF4xyMsEnCYLosLydqi8UgGYhQ9A3mXWu3RpqaQ/AN2jfJm6d2pin/S/Q2zuneo0OQqh/0AjpHeMny45XP5BRWc75kBWqvprjczeJCEahojkHjZC2uZpoHhNU6RtWM6h/aZx1p8BjqLbz/QTN8O+0g7APa/NGgi+G/NU6tWR/rDoLU5lt9aUQ6baAdDS/Cbr2OGgDDiGpFFkjqYKWYj6llINzer+zFNFAe4BRK32Dcjx040KatMTTTl905k2wuEBuJSElYnkCnyfqe7G4XKhZZMoqXz65gHCokbeH7hXhuINTURhCHFukJxErfO+F5evKvSLpgRvy+oy6m3S/o0tbv4Nu9mHZCJY6JVA6BOmSfm1DMKuczdqWfVsfpEvoysLOuqMNJjfTt7SmcVH2RA0xa1zfQ3vyE22XlY2NaMiJdoBvSIyfwRjBGVUBXkI/nBsa/HaJXR4ytT1815VETSwfy1+hcD0p46HtlkepspZ0aWGStr4zHytlW6RMGV0tmEnEIt4aMVj+vbP9SXt3HW06mWKxmIKPm6KBpacp3oLLIFhOPTY6U6X4yxyiuLaCcGJ2+Ccag/XbTYisMLAZUWGMXvhod+tAMHt3hk4TTenqR9ISU8yYxqlbQOewJBJujM9eO7nkTErwYQEf0tO3Lq4k5vG4KNrIenYcAuwzj6CY2CQHyNMlyyES4XXzWwioWe2QnUmxIer5lVT9gzjZEwA8d82j6TgNg8mwiPXPfdYB7nvQCtTTeP9CHhlyqPpHbWFgCwH3XfC4DRotZ8R4rKdm3pjBs7tmzwY5psIEya/sv1CMiueCfvj22uUe1G6474Bm9zF6LyXbIQLShWOhxlQ33vJ//0FEMeaZFn6I2R4AtQHqO5T84DJ+9X+NBShWLfDg4KCyBsqHm1k+KLvzVdUblxAYTfDhPKLCTVo4dYMwyCfqgyFDqRhNrYp7IqwPQPIRDdDsj9B/6/oiSJkps9l/fRsDNlCtcnOnHMyTdcgVYmUIUeCLp3mzQOooaRqGY/0QGg9oahY+kXI7W1Bzs4xD7q77EmeylVP2GtYHVRZLpiTAIdhioMAvScXPQYq4yXcP//10RaONhvOcrajeY7uhcns7+Kcwd0v4orYbhugG7vU3lp9E7UapailbgcAFPF99ORzOTkkIkx+rICnx9D7Xtjhbd2pVV9qynRpnZV20qQ94roRdPFh8uG3T/Xto7N/80PTzLV5vx8rAy0Z1ECnxfBQKl//Esnql'
 ```
 
 **Note:** The `client-ip-forwarded` header is used to pass the client IP address received at the integrating party's backend to the Sign3 backend to retrieve IP intelligence from Sign3.
