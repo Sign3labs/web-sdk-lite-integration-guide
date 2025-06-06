@@ -47,6 +47,45 @@ try {
 }
 ```
 
+### To integrate as umd bundle that is directly supported in browsers
+
+Assuming you have the UMD SDK inside a file named `sign3-web-sdk-umd.js`:
+
+```Html
+<!DOCTYPE html>
+<!--[if lte IE 8]>
+<html lang="en" class="ie">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en">
+<!--<![endif]-->
+  <head lang="en">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Sign3 Web SDK</title>
+  </head>
+  <body class="flex-center">
+    <h1>Sign3 Web SDK</h1>
+    <script src="./sign3-web-sdk-umd"></script>
+    <script>
+      const options = {
+        sessionId: "recdxscds",
+        apiKey: "<you api key>",
+        apiSecret: "<your api secret>"
+      };
+      sign3Sdk.initialize(options).get(
+        function(result) {
+          console.log(result)
+        },
+        function(error) {
+          console.log(error)
+        }
+      )
+    </script>
+  </body>
+</html>
+```
+
 ### Parameters
 
 | Parameter   | Type     | Required | Description                                             |
