@@ -63,17 +63,16 @@ Assuming you have the UMD SDK inside a file named `sign3-web-sdk-umd.js`:
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Sign3 Web SDK</title>
+    <script src="./sign3-web-sdk-umd.js"></script>
   </head>
   <body class="flex-center">
     <h1>Sign3 Web SDK</h1>
-    <script src="./sign3-web-sdk-umd"></script>
     <script>
-      const options = {
+      sign3Sdk.initialize({
         sessionId: "recdxscds",
         apiKey: "<you api key>",
         apiSecret: "<your api secret>"
-      };
-      sign3Sdk.initialize(options).get(
+      }).get(
         function(result) {
           console.log(result)
         },
